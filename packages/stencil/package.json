@@ -1,0 +1,33 @@
+{
+  "name": "@nrwl/stencil",
+  "version": "0.0.1",
+  "description": "StencilJs Plugin for Nx",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrwl/nx.git"
+  },
+  "keywords": [
+    "Monorepo",
+    "React",
+    "Web",
+    "Jest",
+    "Cypress",
+    "CLI"
+  ],
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": "Stefan Nieuwenhuis",
+  "license": "MIT",
+  "schematics": "./collection.json",
+  "ng-update": {
+    "requirements": {},
+    "migrations": "./migrations.json"
+  },
+  "peerDependencies": {
+    "@nrwl/workspace": "*"
+  },
+  "dependencies": {
+    "@nrwl/jest": "*",
+    "@angular-devkit/schematics": "8.3.3"
+  }
+}
