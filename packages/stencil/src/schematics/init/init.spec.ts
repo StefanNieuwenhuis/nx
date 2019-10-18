@@ -1,7 +1,7 @@
 import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import { readJsonInTree } from '@nrwl/workspace';
-import { runSchematic } from '../../utils/testing';
+import { readJsonInTree, updateJsonInTree } from '@nrwl/workspace';
+import { runSchematic, callRule } from '../../utils/testing';
 
 describe('init', () => {
     let tree: Tree;
@@ -28,36 +28,36 @@ describe('init', () => {
 
         it('should be set if @nrwl/workspace was set before', async () => {
             tree = await callRule(
-              updateJsonInTree('workspace.json', json => {
-                json.cli = {
-                  defaultCollection: '@nrwl/workspace'
-                };
-      
-                return json;
-              }),
-              tree
+                updateJsonInTree('workspace.json', json => {
+                    json.cli = {
+                        defaultCollection: '@nrwl/workspace'
+                    };
+
+                    return json;
+                }),
+                tree
             );
             const result = await runSchematic('init', {}, tree);
             const workspaceJson = readJsonInTree(result, 'workspace.json');
             expect(workspaceJson.cli.defaultCollection).toEqual('@nrwl/stencil');
-          });
-      
-          it('should not be set if something else was set before', async () => {
+        });
+
+        it('should not be set if something else was set before', async () => {
             tree = await callRule(
-              updateJsonInTree('workspace.json', json => {
-                json.cli = {
-                  defaultCollection: '@nrwl/angular'
-                };
-      
-                json.schematics = {};
-      
-                return json;
-              }),
-              tree
+                updateJsonInTree('workspace.json', json => {
+                    json.cli = {
+                        defaultCollection: '@nrwl/angular'
+                    };
+
+                    json.schematics = {};
+
+                    return json;
+                }),
+                tree
             );
             const result = await runSchematic('init', {}, tree);
             const workspaceJson = readJsonInTree(result, 'workspace.json');
             expect(workspaceJson.cli.defaultCollection).toEqual('@nrwl/angular');
-          });
+        });
     });
 });
