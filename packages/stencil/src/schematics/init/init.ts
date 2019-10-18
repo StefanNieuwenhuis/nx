@@ -1,12 +1,14 @@
 import { Rule, chain } from '@angular-devkit/schematics';
 import { JsonObject } from '@angular-devkit/core';
 import { addDepsToPackageJson, updateJsonInTree, updateWorkspace, addPackageWithInit, formatFiles } from '@nrwl/workspace';
+import { Schema } from './schema';
 import { frameworkVersion } from '../../utils/versions';
+
 
 export function addDependencies(): Rule {
     return addDepsToPackageJson(
-        { '@stencil/core': frameworkVersion },
-        {}
+        {},
+        { '@stencil/core': frameworkVersion }
     );
 }
 function moveDependency(): Rule {
